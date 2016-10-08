@@ -31,3 +31,9 @@ describe it here
 
 Put some pictures in here
 
+##Data Recogniton Research
+- [one](http://cs229.stanford.edu/proj2015/107_report.pdf)
+- [two](https://www.researchgate.net/publication/294578183_Human_Activity_Recognition_Using_Sensor_Data_of_Smartphones_and_Smartwatches)
+- [three](http://ebooks.iospress.nl/publication/40069)
+
+
