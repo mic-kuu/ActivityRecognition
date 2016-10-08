@@ -1,50 +1,53 @@
 package com.example.michal.activityrecognition;
 
 
-import android.app.IntentService;
+
+import android.app.Service;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
+import android.util.Log;
 
 
-public class SensorService extends IntentService implements SensorEventListener {
+public class SensorService extends Service implements SensorEventListener {
 
-    private SensorManager mSensorManager;
-    private Sensor mMagneticSensor;
-    private Sensor mLightSensor;
+    private SensorManager sensorMangaer;
+    private Sensor lSensor;
 
-    public SensorService(){
-        super("SensorService");
+
+    public static final String TAG = "BUDZIK";
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-
-        // define all sensor related fields
-        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        mLightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-        mMagneticSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-    }
-
-    @Override
-    protected void onHandleIntent(Intent intent) {
-        //here goes sensor code
-
+        Log.i(TAG, "OnCreate");
+        sensorMangaer = (SensorManager) getApplicationContext().getSystemService(SENSOR_SERVICE);
+        lSensor = sensorMangaer.getDefaultSensor(Sensor.TYPE_LIGHT);
+        sensorMangaer.registerListener(this, lSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        Log.i(TAG, "Zarejestrowano listener w onCreate");
 
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        // to save battery - unregister listener after the job is done
-        mSensorManager.unregisterListener(this);
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.i(TAG, "OnStart again");
+        return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
+
+        Log.i(TAG, String.valueOf(sensorEvent.values[0]));
 
     }
 

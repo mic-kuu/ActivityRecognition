@@ -1,9 +1,13 @@
 package com.example.michal.activityrecognition;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +26,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TextView lightSensorVal;
     private TextView magnetometerVal;
 
+    // TODO: resarch if thats the best method
+    private AlarmManager alarmManager;
+
+
     private final String LOG_TAG = "MAIN_ACTIVITY";
 
     @Override
@@ -38,6 +46,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         magnetometerVal = (TextView) findViewById(R.id.tvMagnetometerVal);
         lightSensorVal = (TextView) findViewById(R.id.tvLightSensorVal);
 
+        // set the data collection service
+
+        scheduleDataCollection();
+
+
+
+    }
+
+    private void scheduleDataCollection() {
+
+        Intent intent = new Intent(getApplicationContext(), SensorReceiver.class);
+
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        final PendingIntent pIntent = PendingIntent.getBroadcast(this, SensorReceiver.REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() +
+                        1000, 5000,  pIntent);
 
     }
 
@@ -81,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     //TODO: this is temp function - delete it in future
     public void updateMeasurements(View v){
 
+
+
     }
 
     @Override
@@ -97,5 +126,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         //don't waste battery - unregister the sensors
         mSensorManager.unregisterListener(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+
+
+        super.onDestroy();
     }
 }

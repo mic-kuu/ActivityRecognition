@@ -16,9 +16,17 @@
             </intent-filter>
         </activity>
 
+        <receiver android:name=".SensorReceiver" android:process=":renote" >
+        </receiver>
+
         <service
             android:name=".SensorService"
-            android:exported="false"></service>
+            android:exported="true"
+            android:enabled="true" />
+
     </application>
+
+    <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+
 
 </manifest>
