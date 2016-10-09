@@ -21,7 +21,9 @@ Simple test app that monitors sensor data and sends it to a remote server accord
 
 ##Database structure
 
-describe it here
+Simple database scheme for storing acquired sensor readings. DB will be implemented using SQLite
+
+![Database Scheme](https://i.imgur.com/enrHbEo.png)
 
 ##JSON structure
 
