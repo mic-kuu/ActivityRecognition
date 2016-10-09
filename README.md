@@ -49,7 +49,7 @@ That is the JSON format that will be used to transfer sensor data to the server.
         "timestamp": "2016-10-30 T 10:45 UTC",
         "valueX": "1234",
         "valueY": "1234",
-        "valueZ": "234"
+        "valueZ": "234",
         "accuracy": 2
       }
     ],
@@ -58,7 +58,7 @@ That is the JSON format that will be used to transfer sensor data to the server.
         "timestamp": "2016-10-30 T 10:45 UTC",
         "valueX": "1234",
         "valueY": "1234",
-        "valueZ": "234"
+        "valueZ": "234",
         "accuracy": 2
       }
     ],
@@ -67,9 +67,10 @@ That is the JSON format that will be used to transfer sensor data to the server.
         "timestamp": "2016-10-30 T 10:45 UTC",
         "valueX": "1234",
         "valueY": "1234",
-        "valueZ": "234"
+        "valueZ": "234",
         "accuracy": 2
-      }  
+      }
+    ]
   }
 }
 ```
